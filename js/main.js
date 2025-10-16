@@ -125,6 +125,7 @@ function loadFile(event, allowedExtensions = ["rlmp"]) {
             });
         });
         create_the_plus_btn(code_area);
+        unselect_items();
         
     };
     reader.readAsText(file);
@@ -141,6 +142,7 @@ function saveFile(content, filename = "code.rlmp") {
 }
 
 function save_code() {
+    unselect_items();
     let data = document.getElementById('code_shower').innerHTML;
     let parser = new DOMParser();
     let doc = parser.parseFromString(data, 'text/html');
@@ -193,6 +195,16 @@ function create_btn(parent,text,color) {
 
 function delete_present_plus_btn() {
     document.getElementById("code_shower").removeChild(document.getElementById('add_object_script'));
+}
+
+function unselect_items()
+{
+    let code_area = document.getElementById("code_shower");
+    Array.from(code_area.children).forEach(block_div__ => {
+        block_div__.style.backgroundColor = "white";
+    });
+    clean_the_list(document.getElementbyId("object_list"));
+    clean_the_list(document.getElementbyId("configs_list"));
 }
 
 function select_block_and_show_configs(block_div_id) {
